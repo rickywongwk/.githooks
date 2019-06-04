@@ -1,26 +1,49 @@
 # A set of useful git hooks
 
 These hooks automate some tasks with the help of git.
-For the moment, it is mostly hooks related to tools from the php ecosystem.
 
 ## Documentation
 
-Read [the documentation][1] to learn more about git template.
+Read [the original documentation][extern-doc] to learn more about it.
 
-## Contributing
+### TL;DR
 
-see [CONTRIBUTING.md][2]
+Get templates:
+
+```sh
+git clone https://github.com/rickywongwk/.githooks ~/.githooks
+```
+
+Implant scripts:
+
+```sh
+git config init.templatedir '~/.githooks/template'
+~/.githooks/update.sh
+```
+
+Enable hooks (interactive):
+
+```sh
+$(git rev-parse --git-dir)/configure.sh
+```
+
+OR (manually):
+
+```sh
+git config hooks.enabled-plugins php/composer
+git config --add hooks.enabled-plugins php/ctags
+git config --add hooks.enabled-plugins junkchecker
+```
 
 ## Credits
 
-Inspired by [Tim Pope][3]
+Forked from [here][forked-url]
 
 ## Build Status
 
-[![Build Status][4]][5]
+[![Build Status][build-img]][build-url]
 
-[1]: http://git-template.readthedocs.io
-[2]: ./CONTRIBUTING.md
-[3]: http://tbaggery.com/2011/08/08/effortless-ctags-with-git.html
-[4]: https://travis-ci.org/greg0ire/git_template.png
-[5]: https://travis-ci.org/greg0ire/git_template
+[extern-doc]: http://git-template.readthedocs.io
+[forked-url]: https://github.com/greg0ire/git_template
+[build-img]: https://travis-ci.org/rickywongwk/.githooks.svg?branch=master
+[build-url]: https://travis-ci.org/rickywongwk/.githooks

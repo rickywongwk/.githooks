@@ -1,18 +1,17 @@
 #!/bin/bash
 
-readonly PROGNAME=$(basename "$0")
-readonly PROGDIR="$(cd "$(dirname "$0")"; pwd)"
-readonly GIT_DIR="$(git rev-parse --git-dir)"
-export GIT_DIR
+export GIT_DIR="$(git rev-parse --git-dir)"
 
 . "$GIT_DIR/hooks/hook_switcher.sh"
 
 main() {
+	local source=${BASH_SOURCE[0]}
+	local progdir="$(cd "$(dirname "$source")"; pwd)"
 	local hookName
-	for directory in $(find "$PROGDIR/hooks" -type d | sort | \
-	awk '$0 !~ last "/" {print last} {last=$0} END {print last}')
+	for directory in $(find "$progdir/hooks" -type d | sort | \
+	awk '$source !~ last "/" {print last} {last=$source} END {print last}')
 	do
-		hookName=${directory#$PROGDIR/hooks/}
+		hookName=${directory#$progdir/hooks/}
 		echo "Configuring $hookName"
 		switch_hook "$hookName"
 		find "$directory" -name configure.sh -exec {} \;
